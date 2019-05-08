@@ -13,7 +13,7 @@ class User(models.Model):
 
 class Role(models.Model):
     title = models.CharField(max_length=32)
-    promission = models.ManyToManyField(to='Promission')
+    promissions = models.ManyToManyField(to='Promission')
     def __str__(self):
         return self.title
 
