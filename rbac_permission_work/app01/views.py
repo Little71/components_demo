@@ -5,9 +5,15 @@ from django.shortcuts import render, HttpResponse
 # Create your views here.
 from rbac.models import User, Role, Permission
 
+class Per
 
 def users(request):
     user_list = User.objects.all()
+    permission_list = request.session.get('permission_list')
+    print(permission_list)
+
+    user_id = request.session.get('user_id')
+    user=User.objects.filter(id=user_id).first()
     return render(request, 'users.html', locals())
 
 
@@ -18,20 +24,10 @@ def roles(request):
 
 
 def add_user(request):
-    permission_list = request.session['permission_list']
-    current_path = request.path
-    flag = False
-    for i in permission_list:
-        promission = f'^{i}$'
-        ret = re.match(promission, current_path)
-        if not ret:
-            flag = True
-            break
-
-    if not flag:
-        return HttpResponse('没有访问权限')
     return HttpResponse('adduser')
 
+def del_user(request,id):
+    return HttpResponse(f'delete user {id}')
 
 def login(request):
     if request.method == 'POST':

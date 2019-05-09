@@ -1,14 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h4>角色列表</h4>
-{% for role in role_list %}
-    <p>{{ role }}</p>
+{% extends 'base.html' %}
 
-{% endfor %}
-</body>
-</html>
+{% block con %}
+    <h4>角色列表</h4>
+
+    <a href="" class="btn btn-primary">添加角色</a>
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>序号</th>
+            <th>角色名</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for role in role_list %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ role.title }}</td>
+                <td>
+                    <a href="" class="btn btn-warning">编辑</a>
+                    <a href="" class="btn btn-danger">删除</a>
+                </td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+{% endblock %}
