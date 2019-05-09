@@ -13,12 +13,12 @@ class User(models.Model):
 
 class Role(models.Model):
     title = models.CharField(max_length=32)
-    promissions = models.ManyToManyField(to='Promission')
+    permissions = models.ManyToManyField(to='Permission')
     def __str__(self):
         return self.title
 
 
-class Promission(models.Model):
+class Permission(models.Model):
     title = models.CharField(max_length=32)
     url = models.CharField(max_length=32)
 

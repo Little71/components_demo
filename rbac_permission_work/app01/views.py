@@ -1,7 +1,9 @@
+import re
+
 from django.shortcuts import render, HttpResponse
 
 # Create your views here.
-from rbac.models import User, Role, Promission
+from rbac.models import User, Role, Permission
 
 
 def users(request):
@@ -10,12 +12,24 @@ def users(request):
 
 
 def roles(request):
-    user_list = Role.objects.all()
+    role_list = Role.objects.all()
 
-    return render(request, 'users.html', locals())
+    return render(request, 'roles.html', locals())
 
 
 def add_user(request):
+    permission_list = request.session['permission_list']
+    current_path = request.path
+    flag = False
+    for i in permission_list:
+        promission = f'^{i}$'
+        ret = re.match(promission, current_path)
+        if not ret:
+            flag = True
+            break
+
+    if not flag:
+        return HttpResponse('没有访问权限')
     return HttpResponse('adduser')
 
 
@@ -25,11 +39,7 @@ def login(request):
         pwd = request.POST.get('pwd')
         user = User.objects.filter(name=username, pwd=pwd).first()
         if user:
-            request.session['user_id'] = user.pk
-            promissions = user.roles.all().values('promissions__url').distinct()
-            promission_list = []
-            for item in promissions:
-                promission_list.append(item['promissions__url'])
-            request.session['promission_list'] = promission_list
+            from rbac.service.permission import initila_session
+            initila_session(request, user)
             return HttpResponse('登录成功')
     return render(request, 'login.html')
