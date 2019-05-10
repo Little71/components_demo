@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+<a href="/books/add" class="btn btn-primary">添加书籍</a>
+<table class="table table-bordered table-striped">
+    {% for book in books %}
+        <tr>
+            <td>{{ book.title }}</td>
+            <td>{{ book.price }}</td>
+            <td>{{ book.date|date:"Y-m-d" }}</td>
+            <td>{{ book.publish.name }}</td>
+            <td>{% for author in book.authors.all %}
+
+                {{ author.name }},
+            {% endfor %}
+            </td>
+        <td><a href="/books/edit/{{ book.pk }}" class="btn btn-success">编辑</a></td>
+        </tr>
+    {% endfor %}
+
+</table>
+</body>
+</html>

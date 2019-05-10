@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'rbac/base.html' %}
 
 {% block con %}
     <h4>角色列表</h4>
@@ -18,8 +18,14 @@
                 <td>{{ forloop.counter }}</td>
                 <td>{{ role.title }}</td>
                 <td>
-                    <a href="" class="btn btn-warning">编辑</a>
-                    <a href="" class="btn btn-danger">删除</a>
+                    {% if 'edit' in request.actions %}
+
+                        <a href="" class="btn btn-warning">编辑</a>
+                    {% endif %}
+                    {% if 'delete' in request.actions %}
+
+                        <a href="" class="btn btn-danger">删除</a>
+                    {% endif %}
                 </td>
             </tr>
         {% endfor %}

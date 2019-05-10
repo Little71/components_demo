@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<h3>添加页面</h3>
+
+<form action="" method="post">
+     {% csrf_token %}
+    <p>书籍名称 <input type="text" name="title"></p>
+    <p>价格 <input type="text" name="price"></p>
+    <p>日期 <input type="date" name="date"></p>
+    <p>出版社
+        <select name="publish_id" id="">
+              {% for publish in publish_list %}
+                  <option value="{{ publish.pk }}">{{ publish.name }}</option>
+              {% endfor %}
+
+        </select>
+    </p>
+    <p>作者
+
+        <select name="author_pk_list" id="" multiple>
+              {% for author in author_list %}
+                  <option value="{{ author.pk }}">{{ author.name }}</option>
+              {% endfor %}
+
+        </select>
+    </p>
+    <input type="submit">
+</form>
+</body>
+</html>

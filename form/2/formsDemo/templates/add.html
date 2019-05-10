@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<h3>添加页面</h3>
+
+<form action="" method="post" novalidate>
+     {% csrf_token %}
+
+     {% for field in form %}
+        <div>
+         {{ field.label }}
+         {{ field }}
+        </div>
+     {% endfor %}
+
+    <input type="submit">
+</form>
+</body>
+</html>

@@ -5,22 +5,22 @@ from django.shortcuts import render, HttpResponse
 # Create your views here.
 from rbac.models import User, Role, Permission
 
-class Per
+class Per:
+    pass
 
 def users(request):
     user_list = User.objects.all()
     permission_list = request.session.get('permission_list')
-    print(permission_list)
 
     user_id = request.session.get('user_id')
     user=User.objects.filter(id=user_id).first()
-    return render(request, 'users.html', locals())
+    return render(request, 'rbac/users.html', locals())
 
 
 def roles(request):
     role_list = Role.objects.all()
 
-    return render(request, 'roles.html', locals())
+    return render(request, 'rbac/roles.html', locals())
 
 
 def add_user(request):

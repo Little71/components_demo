@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+<h3>编辑书籍</h3>
+<form action="" method="post">
+    {% csrf_token %}
+    {#    <p>书籍名: <input type="text" name="title" value="{{ edit_book.title }}"></p>#}
+    {#    <p>价格: <input type="text" name="price" value="{{ edit_book.price }}"></p>#}
+    {#    <p>日期: <input type="date" name="date" value="{{ edit_book.date|date:'Y-m-d' }}"></p>#}
+    {#    <p>出版社:#}
+    {#        <select name="publish_id" id="">#}
+    {#            {% for publish in publish_list %}#}
+    {#                {% if edit_book.publish == publish %}#}
+    {#                    <option selected value="{{ publish.pk }}">{{ publish.name }}</option>#}
+    {#                {% else %}#}
+    {#                    <option value="{{ publish.pk }}">{{ publish.name }}</option>#}
+    {#                {% endif %}#}
+    {##}
+    {#            {% endfor %}#}
+    {##}
+    {#        </select></p>#}
+    {#    <p>作者:#}
+    {#        <select name="author_pk_list" id="" multiple>#}
+    {#            {% for author in author_list %}#}
+    {#                {% if author in edit_book.authors.all %}#}
+    {#                    <option selected value="{{ author.pk }}">{{ author.name }}</option>#}
+    {#                {% else %}#}
+    {#                    <option value="{{ author.pk }}">{{ author.name }}</option>#}
+    {#                {% endif %}#}
+    {##}
+    {#            {% endfor %}#}
+    {##}
+    {#        </select></p>#}
+
+    {% for field in form %}
+        <div>
+            {{ field.label }}
+            {{ field }}
+        </div>
+    {% endfor %}
+
+    <input type="submit">
+</form>
+</body>
+</html>

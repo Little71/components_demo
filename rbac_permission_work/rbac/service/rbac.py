@@ -27,11 +27,12 @@ class ValiPermission(MiddlewareMixin):
         # if not flag:
         #     return HttpResponse('没有访问权限')
 
-        permission_dict = request.session.get('permission_dict', '')
+        permission_dict = request.session.get('permission_dict', dict())
         for item in permission_dict.values():
             for url in item['urls']:
                 promission = f'^{url}$'
                 ret = re.match(promission, current_path)
                 if ret:
+                    request.actions = item.get('actions')
                     return
         return HttpResponse('没有访问权限')

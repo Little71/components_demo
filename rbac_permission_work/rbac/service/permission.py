@@ -25,7 +25,7 @@ def initila_session(request, user):
         gid = item.get('permissions__group_id')
         if gid in permission_dict.keys():
             permission_dict[gid]['urls'].append(item.get('permissions__url'))
-            permission_dict[gid]['action'].append(item.get('permissions__action'))
+            permission_dict[gid]['actions'].append(item.get('permissions__action'))
         else:
             permission_dict[gid] = {
                 'urls': [item.get('permissions__url')],
@@ -33,3 +33,14 @@ def initila_session(request, user):
             }
     request.session['user_id'] = user.pk
     request.session['permission_dict'] = permission_dict
+
+
+    print(permissions)
+
+    menu_list_permissions= []
+    for item in permissions:
+        if item['permissions__action'] == "list":
+            menu_list_permissions.append((item['permissions__url'],item['permissions__action']))
+    print(menu_list_permissions)
+    request.session['menu_list_permissions'] = menu_list_permissions
+
